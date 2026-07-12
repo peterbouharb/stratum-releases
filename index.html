@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>Cledion Stratum — Download</title>
-<meta name="description" content="Cledion Stratum: local-first network monitoring. Download the desktop app for Windows, macOS, or Linux." />
+<meta name="description" content="Cledion Stratum: local-first network monitoring. Download the Windows desktop app." />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!--
@@ -15,19 +15,24 @@
   directly from the repo.
 
   ============================================================================
-  BEFORE DEPLOYING: replace the two placeholder constants below
-  (REPO_OWNER / REPO_NAME) with the real GitHub org/repo that
-  .github/workflows/release.yml publishes releases to.
+  Public download page:
+    https://peterbouharb.github.io/stratum-releases/
+
+  Direct Windows installer link:
+    https://peterbouharb.github.io/stratum-releases/downloads/Cledion-Stratum-Setup.exe
+
+  The source for this page is kept here in the private repo and mirrored to
+  the public releases-only repo. The actual installer files are served from
+  that public repo's GitHub Pages `/downloads/` directory so a normal browser
+  click starts the download without exposing the application source.
   ============================================================================
 
   Asset filenames referenced below are the *stable, version-free aliases*
   the release workflow copies alongside each real (versioned) installer
   filename specifically so this page's links never go stale between
-  releases — see the "Create stable-named download aliases" step in
-  .github/workflows/release.yml. Do not point these links at Tauri's
+  releases. Do not point these links at Tauri's
   actual versioned bundle filenames (e.g. "Cledion Stratum_0.1.0_x64-setup.exe")
-  — those change every release and GitHub's /latest/download/<name>
-  shortcut only works for a name that stays constant release to release.
+  — those change every release.
 -->
 
 <style>
@@ -300,7 +305,8 @@
     flex-direction: column;
     gap: 8px;
   }
-  .platform-links a {
+  .platform-links a,
+  .platform-links .unavailable {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -313,6 +319,14 @@
   }
   .platform-links a:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
   .platform-links a .fmt { color: var(--ink-dim); }
+  .platform-links .unavailable {
+    color: var(--ink-dim);
+    border-style: dashed;
+    cursor: default;
+  }
+  .platform-card[data-unavailable="true"] {
+    opacity: 0.62;
+  }
 
   /* ---------- Body sections ---------- */
 
@@ -399,30 +413,31 @@
       <div class="platform-links">
         <a href="#" data-asset="Cledion-Stratum-Setup.exe">Installer <span class="fmt mono">.exe</span></a>
         <a href="#" data-asset="Cledion-Stratum.msi">MSI package <span class="fmt mono">.msi</span></a>
+        <a href="#" data-asset="SHA256SUMS.txt">Checksums <span class="fmt mono">.txt</span></a>
       </div>
     </article>
 
-    <article class="platform-card" data-os="macos" id="card-macos">
+    <article class="platform-card" data-os="macos" id="card-macos" data-unavailable="true">
       <svg class="platform-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
         <rect x="4" y="3" width="16" height="16" rx="5" /><path d="M9 12h6" /><path d="M12 9v6" />
       </svg>
       <p class="platform-title">macOS</p>
-      <p class="platform-sub">macOS 10.15+, Apple Silicon or Intel</p>
+      <p class="platform-sub">Build coming after macOS signing/notarization</p>
       <div class="platform-links">
-        <a href="#" data-asset="Cledion-Stratum-arm64.dmg">Apple Silicon <span class="fmt mono">.dmg</span></a>
-        <a href="#" data-asset="Cledion-Stratum-x64.dmg">Intel <span class="fmt mono">.dmg</span></a>
+        <span class="unavailable">Apple Silicon <span class="fmt mono">.dmg</span></span>
+        <span class="unavailable">Intel <span class="fmt mono">.dmg</span></span>
       </div>
     </article>
 
-    <article class="platform-card" data-os="linux" id="card-linux">
+    <article class="platform-card" data-os="linux" id="card-linux" data-unavailable="true">
       <svg class="platform-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
         <path d="M4 17l4-10 4 10" /><path d="M12 17l4-14 4 14" /><path d="M3 20h18" />
       </svg>
       <p class="platform-title">Linux</p>
-      <p class="platform-sub">Debian/Ubuntu or any distro (AppImage)</p>
+      <p class="platform-sub">Build coming after Linux release validation</p>
       <div class="platform-links">
-        <a href="#" data-asset="Cledion-Stratum.AppImage">AppImage <span class="fmt mono">.AppImage</span></a>
-        <a href="#" data-asset="Cledion-Stratum.deb">Debian package <span class="fmt mono">.deb</span></a>
+        <span class="unavailable">AppImage <span class="fmt mono">.AppImage</span></span>
+        <span class="unavailable">Debian package <span class="fmt mono">.deb</span></span>
       </div>
     </article>
   </section>
@@ -459,6 +474,7 @@
     // ==========================================================================
     var REPO_OWNER = "peterbouharb";
     var REPO_NAME = "stratum-releases";
+    var DOWNLOAD_BASE = "https://peterbouharb.github.io/stratum-releases/downloads/";
 
     var repoLink = document.getElementById("repo-link");
 
@@ -489,16 +505,17 @@
       return; // do not wire any github.com/OWNER/REPO links below
     }
 
-    var releaseBase = "https://github.com/" + REPO_OWNER + "/" + REPO_NAME + "/releases/latest/download/";
     var repoPage = "https://github.com/" + REPO_OWNER + "/" + REPO_NAME;
 
     repoLink.href = repoPage;
     repoLink.textContent = "github.com/" + REPO_OWNER + "/" + REPO_NAME;
 
-    // Wire every per-platform link to the real release asset URL.
+    // Wire every available per-platform link to the public Pages download URL.
     var links = document.querySelectorAll(".platform-links a[data-asset]");
     for (var i = 0; i < links.length; i++) {
-      links[i].href = releaseBase + links[i].getAttribute("data-asset");
+      var asset = links[i].getAttribute("data-asset");
+      links[i].href = DOWNLOAD_BASE + asset;
+      links[i].setAttribute("download", asset);
     }
 
     // ---- OS auto-detection for the big hero button -------------------------
@@ -506,8 +523,9 @@
     // broadly-supported signal; userAgentData.platform is preferred where
     // Chromium exposes it. Reliable CPU-architecture detection (Apple
     // Silicon vs Intel) isn't available from script without a permission
-    // prompt, so macOS defaults to the Apple Silicon build with an explicit
-    // Intel link alongside it.
+    // prompt. Today the public build is Windows-only, so non-Windows users
+    // see the available Windows installer and the other platform cards stay
+    // visibly unavailable instead of linking to missing files.
     function detectOS() {
       var uaData = navigator.userAgentData;
       var platform = (uaData && uaData.platform) || navigator.platform || "";
@@ -522,9 +540,7 @@
     }
 
     var PRIMARY = {
-      windows: { asset: "Cledion-Stratum-Setup.exe", label: "Download for Windows", meta: "Setup.exe · also available as .msi below" },
-      macos:   { asset: "Cledion-Stratum-arm64.dmg", label: "Download for Mac (Apple Silicon)", meta: "Intel Mac? Get the Intel build below" },
-      linux:   { asset: "Cledion-Stratum.AppImage",  label: "Download for Linux", meta: "AppImage · runs without installing · .deb also available" }
+      windows: { asset: "Cledion-Stratum-Setup.exe", label: "Download for Windows", meta: "Setup.exe · also available as .msi below" }
     };
 
     var os = detectOS();
@@ -534,15 +550,22 @@
 
     if (os && PRIMARY[os]) {
       var choice = PRIMARY[os];
-      btn.href = releaseBase + choice.asset;
+      btn.href = DOWNLOAD_BASE + choice.asset;
+      btn.setAttribute("download", choice.asset);
       label.textContent = choice.label;
       meta.textContent = choice.meta;
       var card = document.getElementById("card-" + os);
       if (card) card.setAttribute("data-active", "true");
+    } else if (os === "macos" || os === "linux") {
+      btn.href = DOWNLOAD_BASE + PRIMARY.windows.asset;
+      btn.setAttribute("download", PRIMARY.windows.asset);
+      label.textContent = "Download for Windows";
+      meta.textContent = "Windows pre-release is available now; macOS and Linux builds are coming later.";
     } else {
-      label.textContent = "See download options";
-      meta.textContent = "We couldn't detect your OS — pick a platform below.";
-      btn.href = "#platforms";
+      btn.href = DOWNLOAD_BASE + PRIMARY.windows.asset;
+      btn.setAttribute("download", PRIMARY.windows.asset);
+      label.textContent = "Download for Windows";
+      meta.textContent = "Setup.exe · checksums below";
     }
   })();
 </script>

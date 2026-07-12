@@ -1,45 +1,37 @@
-# Cledion Stratum — Downloads
+# Cledion Stratum Downloads
 
 Public download home for **Cledion Stratum**, the desktop app for data-center
-monitoring (SNMP device discovery, sensors, dashboards, alerting — all local,
-no server to stand up).
+monitoring. The application source is developed privately; this repository
+hosts only the download page, installers, and checksums.
 
-The application source is developed in a private repository; this repository
-hosts only the release installers so that anyone can download them.
+Download page:
+<https://peterbouharb.github.io/stratum-releases/>
 
-**Download page: https://peterbouharb.github.io/stratum-releases/**
-
-Or grab the latest build directly:
+Direct Windows downloads:
 
 | Platform | Download |
 | --- | --- |
-| Windows installer (recommended) | [Cledion-Stratum-Setup.exe](https://github.com/peterbouharb/stratum-releases/releases/latest/download/Cledion-Stratum-Setup.exe) |
-| Windows MSI | [Cledion-Stratum.msi](https://github.com/peterbouharb/stratum-releases/releases/latest/download/Cledion-Stratum.msi) |
-| macOS (Apple Silicon) | [Cledion-Stratum-arm64.dmg](https://github.com/peterbouharb/stratum-releases/releases/latest/download/Cledion-Stratum-arm64.dmg) |
-| macOS (Intel) | [Cledion-Stratum-x64.dmg](https://github.com/peterbouharb/stratum-releases/releases/latest/download/Cledion-Stratum-x64.dmg) |
-| Linux (Debian/Ubuntu) | [Cledion-Stratum.deb](https://github.com/peterbouharb/stratum-releases/releases/latest/download/Cledion-Stratum.deb) |
-| Linux (AppImage) | [Cledion-Stratum.AppImage](https://github.com/peterbouharb/stratum-releases/releases/latest/download/Cledion-Stratum.AppImage) |
+| Windows installer (recommended) | [Cledion-Stratum-Setup.exe](https://peterbouharb.github.io/stratum-releases/downloads/Cledion-Stratum-Setup.exe) |
+| Windows MSI | [Cledion-Stratum.msi](https://peterbouharb.github.io/stratum-releases/downloads/Cledion-Stratum.msi) |
+| Checksums | [SHA256SUMS.txt](https://peterbouharb.github.io/stratum-releases/downloads/SHA256SUMS.txt) |
 
-## Verify your download
+macOS and Linux builds are not published yet.
 
-Every release includes a `SHA256SUMS.txt` asset. After downloading, compare
-the hash of your file against the one listed there:
+## Verify Your Download
 
-- **Windows (PowerShell):** `Get-FileHash .\Cledion-Stratum-Setup.exe -Algorithm SHA256`
-- **macOS / Linux:** `shasum -a 256 Cledion-Stratum-Setup.exe`
+Every installer has an entry in `SHA256SUMS.txt`.
 
-If the hash doesn't match the entry in `SHA256SUMS.txt`, don't run the
-installer — re-download it from this repository only.
+Windows PowerShell:
 
-## About unsigned pre-release builds
+```powershell
+Get-FileHash .\Cledion-Stratum-Setup.exe -Algorithm SHA256
+```
 
-Current builds are **unsigned pre-release builds** (code signing is being set
-up). Operating systems will warn on first run:
+If the hash does not match the entry in `SHA256SUMS.txt`, do not run the
+installer. Re-download it from this repository only.
 
-- **Windows SmartScreen** — "Windows protected your PC": click
-  **More info → Run anyway**.
-- **macOS Gatekeeper** — right-click the app → **Open**, or allow it under
-  **System Settings → Privacy & Security → Open Anyway**.
+## Unsigned Pre-Release
 
-Only download Cledion Stratum from this repository or the download page
-above — no other source is official.
+Current builds are unsigned pre-release builds while code signing is being set
+up. Windows SmartScreen may show "Windows protected your PC"; use **More info**
+then **Run anyway** only if the file hash matches `SHA256SUMS.txt`.
