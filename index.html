@@ -429,15 +429,16 @@
       </div>
     </article>
 
-    <article class="platform-card" data-os="linux" id="card-linux" data-unavailable="true">
+    <article class="platform-card" data-os="linux" id="card-linux">
       <svg class="platform-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
         <path d="M4 17l4-10 4 10" /><path d="M12 17l4-14 4 14" /><path d="M3 20h18" />
       </svg>
       <p class="platform-title">Linux</p>
-      <p class="platform-sub">Build coming after Linux release validation</p>
+      <p class="platform-sub">Debian 12+ / Ubuntu 22.04+, 64-bit</p>
       <div class="platform-links">
-        <span class="unavailable">AppImage <span class="fmt mono">.AppImage</span></span>
-        <span class="unavailable">Debian package <span class="fmt mono">.deb</span></span>
+        <a href="#" data-asset="Cledion-Stratum.deb">Debian package <span class="fmt mono">.deb</span></a>
+        <a href="#" data-asset="SHA256SUMS.txt">Checksums <span class="fmt mono">.txt</span></a>
+        <span class="unavailable">AppImage <span class="fmt mono">on request</span></span>
       </div>
     </article>
   </section>
@@ -540,7 +541,8 @@
     }
 
     var PRIMARY = {
-      windows: { asset: "Cledion-Stratum-Setup.exe", label: "Download for Windows", meta: "Setup.exe · also available as .msi below" }
+      windows: { asset: "Cledion-Stratum-Setup.exe", label: "Download for Windows", meta: "Setup.exe · also available as .msi below" },
+      linux: { asset: "Cledion-Stratum.deb", label: "Download for Linux", meta: ".deb for Debian/Ubuntu · checksums below" }
     };
 
     var os = detectOS();
@@ -556,11 +558,11 @@
       meta.textContent = choice.meta;
       var card = document.getElementById("card-" + os);
       if (card) card.setAttribute("data-active", "true");
-    } else if (os === "macos" || os === "linux") {
+    } else if (os === "macos") {
       btn.href = DOWNLOAD_BASE + PRIMARY.windows.asset;
       btn.setAttribute("download", PRIMARY.windows.asset);
       label.textContent = "Download for Windows";
-      meta.textContent = "Windows pre-release is available now; macOS and Linux builds are coming later.";
+      meta.textContent = "Windows and Linux builds are available now; the macOS build is coming later.";
     } else {
       btn.href = DOWNLOAD_BASE + PRIMARY.windows.asset;
       btn.setAttribute("download", PRIMARY.windows.asset);
