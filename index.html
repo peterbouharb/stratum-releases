@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Cledion Stratum — Download</title>
-<meta name="description" content="Cledion Stratum: local-first network monitoring. Download the Windows desktop app." />
+<title>Cledion Stratum Free — Download</title>
+<meta name="description" content="Cledion Stratum Free: local-first network & infrastructure monitoring. Free desktop app for Windows and Linux. Signed installers." />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!--
@@ -384,11 +384,12 @@
 <main class="wrap">
   <section class="hero">
     <div class="hero-inner">
-      <span class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> desktop app · runs entirely on your machine</span>
+      <span class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> free hobbyist edition · runs entirely on your machine</span>
       <h1>Local-first <span class="mono">network</span> monitoring.</h1>
       <p class="pitch">
-        Cledion Stratum watches your devices, sensors, and racks from a single
-        desktop app — no cloud account, no data leaving your network.
+        Cledion Stratum Free watches your devices, sensors, and racks from a single
+        desktop app — no cloud account, no data leaving your network. Free for
+        Windows and Linux.
       </p>
 
       <div class="download-cta">
@@ -411,8 +412,8 @@
       <p class="platform-title">Windows</p>
       <p class="platform-sub">Windows 10/11, 64-bit</p>
       <div class="platform-links">
-        <a href="#" data-asset="Cledion-Stratum-Setup.exe">Installer <span class="fmt mono">.exe</span></a>
-        <a href="#" data-asset="Cledion-Stratum.msi">MSI package <span class="fmt mono">.msi</span></a>
+        <a href="#" data-asset="Cledion-Stratum-Free-Setup.exe">Installer <span class="fmt mono">.exe</span></a>
+        <a href="#" data-asset="Cledion-Stratum-Free.msi">MSI package <span class="fmt mono">.msi</span></a>
         <a href="#" data-asset="SHA256SUMS.txt">Checksums <span class="fmt mono">.txt</span></a>
       </div>
     </article>
@@ -436,9 +437,9 @@
       <p class="platform-title">Linux</p>
       <p class="platform-sub">Debian 12+ / Ubuntu 22.04+, 64-bit</p>
       <div class="platform-links">
-        <a href="#" data-asset="Cledion-Stratum.deb">Debian package <span class="fmt mono">.deb</span></a>
+        <a href="#" data-asset="Cledion-Stratum-Free.deb">Debian package <span class="fmt mono">.deb</span></a>
+        <a href="#" data-asset="Cledion-Stratum-Free.AppImage">AppImage <span class="fmt mono">.AppImage</span></a>
         <a href="#" data-asset="SHA256SUMS.txt">Checksums <span class="fmt mono">.txt</span></a>
-        <span class="unavailable">AppImage <span class="fmt mono">on request</span></span>
       </div>
     </article>
   </section>
@@ -460,8 +461,8 @@
 </main>
 
 <footer class="wrap">
-  <span>Cledion Stratum · <a id="repo-link" href="#" class="mono">github.com/peterbouharb/stratum-releases</a></span>
-  <span>Installers are unsigned pre-release builds until code signing is wired up — see <span class="mono">docs/SIGNING.md</span>.</span>
+  <span>Cledion Stratum Free · <a id="repo-link" href="#" class="mono">github.com/peterbouharb/stratum-releases</a></span>
+  <span>Windows installers are code-signed (publisher: Cledion, Inc., via Azure Trusted Signing). Linux packages follow the platform norm and are unsigned.</span>
 </footer>
 
 <script>
@@ -475,7 +476,10 @@
     // ==========================================================================
     var REPO_OWNER = "peterbouharb";
     var REPO_NAME = "stratum-releases";
-    var DOWNLOAD_BASE = "https://peterbouharb.github.io/stratum-releases/downloads/";
+    // Free-edition installers are published as GitHub Release assets (the
+    // AppImage is >100MB, above the git file limit, so a committed /downloads/
+    // dir can't hold it). Release-asset URLs are public and stable per tag.
+    var DOWNLOAD_BASE = "https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/";
 
     var repoLink = document.getElementById("repo-link");
 
@@ -541,8 +545,8 @@
     }
 
     var PRIMARY = {
-      windows: { asset: "Cledion-Stratum-Setup.exe", label: "Download for Windows", meta: "Setup.exe · also available as .msi below" },
-      linux: { asset: "Cledion-Stratum.deb", label: "Download for Linux", meta: ".deb for Debian/Ubuntu · checksums below" }
+      windows: { asset: "Cledion-Stratum-Free-Setup.exe", label: "Download for Windows", meta: "Signed .exe · also available as .msi below" },
+      linux: { asset: "Cledion-Stratum-Free.deb", label: "Download for Linux", meta: ".deb for Debian/Ubuntu · AppImage + checksums below" }
     };
 
     var os = detectOS();
