@@ -7,15 +7,17 @@ hosts only the download page, installers, and checksums.
 Download page:
 <https://peterbouharb.github.io/stratum-releases/>
 
-Direct Windows downloads:
+Current Free v0.1.0 downloads:
 
 | Platform | Download |
 | --- | --- |
-| Windows installer (recommended) | [Cledion-Stratum-Setup.exe](https://peterbouharb.github.io/stratum-releases/downloads/Cledion-Stratum-Setup.exe) |
-| Windows MSI | [Cledion-Stratum.msi](https://peterbouharb.github.io/stratum-releases/downloads/Cledion-Stratum.msi) |
-| Checksums | [SHA256SUMS.txt](https://peterbouharb.github.io/stratum-releases/downloads/SHA256SUMS.txt) |
+| Windows installer (recommended) | [Cledion-Stratum-Free-Setup.exe](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/Cledion-Stratum-Free-Setup.exe) |
+| Windows MSI | [Cledion-Stratum-Free.msi](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/Cledion-Stratum-Free.msi) |
+| Debian / Ubuntu | [Cledion-Stratum-Free.deb](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/Cledion-Stratum-Free.deb) |
+| Linux AppImage | [Cledion-Stratum-Free.AppImage](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/Cledion-Stratum-Free.AppImage) |
+| SHA-256 checksums | [SHA256SUMS.txt](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/SHA256SUMS.txt) |
 
-macOS and Linux builds are not published yet.
+macOS is not published yet.
 
 ## Verify Your Download
 
@@ -24,14 +26,15 @@ Every installer has an entry in `SHA256SUMS.txt`.
 Windows PowerShell:
 
 ```powershell
-Get-FileHash .\Cledion-Stratum-Setup.exe -Algorithm SHA256
+Get-FileHash .\Cledion-Stratum-Free-Setup.exe -Algorithm SHA256
 ```
 
 If the hash does not match the entry in `SHA256SUMS.txt`, do not run the
 installer. Re-download it from this repository only.
 
-## Unsigned Pre-Release
+## Signing
 
-Current builds are unsigned pre-release builds while code signing is being set
-up. Windows SmartScreen may show "Windows protected your PC"; use **More info**
-then **Run anyway** only if the file hash matches `SHA256SUMS.txt`.
+The Windows `.exe`, `.msi`, and embedded application executables are
+Authenticode-signed by **Cledion, Inc.** through Azure Trusted Signing.
+Linux packages follow the platform norm and are not code-signed; verify them
+with `SHA256SUMS.txt`.

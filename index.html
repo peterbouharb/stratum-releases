@@ -19,20 +19,16 @@
     https://peterbouharb.github.io/stratum-releases/
 
   Direct Windows installer link:
-    https://peterbouharb.github.io/stratum-releases/downloads/Cledion-Stratum-Setup.exe
+    https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/Cledion-Stratum-Free-Setup.exe
 
   The source for this page is kept here in the private repo and mirrored to
-  the public releases-only repo. The actual installer files are served from
-  that public repo's GitHub Pages `/downloads/` directory so a normal browser
-  click starts the download without exposing the application source.
+  the public releases-only repo. The actual installer files are served as
+  GitHub Release assets so a normal browser click starts the download without
+  exposing the application source.
   ============================================================================
 
-  Asset filenames referenced below are the *stable, version-free aliases*
-  the release workflow copies alongside each real (versioned) installer
-  filename specifically so this page's links never go stale between
-  releases. Do not point these links at Tauri's
-  actual versioned bundle filenames (e.g. "Cledion Stratum_0.1.0_x64-setup.exe")
-  — those change every release.
+  Asset filenames referenced below are the stable aliases attached to the
+  Free v0.1.0 GitHub Release.
 -->
 
 <style>
@@ -515,7 +511,7 @@
     repoLink.href = repoPage;
     repoLink.textContent = "github.com/" + REPO_OWNER + "/" + REPO_NAME;
 
-    // Wire every available per-platform link to the public Pages download URL.
+    // Wire every available per-platform link to the public Release asset URL.
     var links = document.querySelectorAll(".platform-links a[data-asset]");
     for (var i = 0; i < links.length; i++) {
       var asset = links[i].getAttribute("data-asset");
@@ -528,9 +524,8 @@
     // broadly-supported signal; userAgentData.platform is preferred where
     // Chromium exposes it. Reliable CPU-architecture detection (Apple
     // Silicon vs Intel) isn't available from script without a permission
-    // prompt. Today the public build is Windows-only, so non-Windows users
-    // see the available Windows installer and the other platform cards stay
-    // visibly unavailable instead of linking to missing files.
+    // prompt. Windows and Linux are available; macOS remains visibly
+    // unavailable instead of linking to a missing file.
     function detectOS() {
       var uaData = navigator.userAgentData;
       var platform = (uaData && uaData.platform) || navigator.platform || "";
