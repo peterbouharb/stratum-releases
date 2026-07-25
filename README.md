@@ -7,15 +7,15 @@ hosts only the download page, installers, and checksums.
 Download page:
 <https://peterbouharb.github.io/stratum-releases/>
 
-Current Free v0.1.0 downloads:
+Current Free v0.1.1 downloads:
 
 | Platform | Download |
 | --- | --- |
-| Windows installer (recommended) | [Cledion-Stratum-Free-Setup.exe](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/Cledion-Stratum-Free-Setup.exe) |
-| Windows MSI | [Cledion-Stratum-Free.msi](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/Cledion-Stratum-Free.msi) |
-| Debian / Ubuntu | [Cledion-Stratum-Free.deb](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/Cledion-Stratum-Free.deb) |
-| Linux AppImage | [Cledion-Stratum-Free.AppImage](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/Cledion-Stratum-Free.AppImage) |
-| SHA-256 checksums | [SHA256SUMS.txt](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.0/SHA256SUMS.txt) |
+| Windows installer (recommended) | [Cledion-Stratum-Free-Setup.exe](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.1/Cledion-Stratum-Free-Setup.exe) |
+| Windows MSI | [Cledion-Stratum-Free.msi](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.1/Cledion-Stratum-Free.msi) |
+| Debian / Ubuntu | [Cledion-Stratum-Free.deb](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.1/Cledion-Stratum-Free.deb) |
+| Linux AppImage | [Cledion-Stratum-Free.AppImage](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.1/Cledion-Stratum-Free.AppImage) |
+| SHA-256 checksums | [SHA256SUMS.txt](https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.1/SHA256SUMS.txt) |
 
 macOS is not published yet.
 
