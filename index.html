@@ -442,6 +442,44 @@
     </article>
   </section>
 
+  <!-- Screenshots. A monitoring tool with no pictures of itself is asking a lot
+       of a stranger; these are the real UI, not mockups. -->
+  <style>
+    .shots { margin: 3rem 0 1rem; }
+    .shots h2 { margin: 0 0 .35rem; }
+    .shots > p { margin: 0 0 1.75rem; opacity: .75; max-width: 60ch; }
+    .shot { margin: 0 0 2.25rem; }
+    .shot img {
+      display: block; width: 100%; height: auto; max-width: 100%;
+      border-radius: 10px; border: 1px solid rgba(128,128,128,.28);
+    }
+    .shot figcaption { margin-top: .6rem; font-size: .93rem; opacity: .78; max-width: 68ch; }
+  </style>
+  <section class="shots" aria-label="Screenshots">
+    <h2>What it looks like</h2>
+    <p>Screens from a running install, not mockups.</p>
+
+    <figure class="shot">
+      <img src="docs/img/alerts.png" alt="Alarms page: active alerts grouped by probable root cause, beside the alert rules that raised them" loading="lazy" decoding="async">
+      <figcaption>Alerting with hysteresis — a raise threshold, a separate clear threshold and a minimum breach duration, so a sensor sitting on the line does not flap. Related alerts are grouped under a probable single cause.</figcaption>
+    </figure>
+
+    <figure class="shot">
+      <img src="docs/img/topology.png" alt="Network topology from the upstream link down to endpoint groups, with latency and link utilisation" loading="lazy" decoding="async">
+      <figcaption>Live topology from the upstream link down to the endpoints, with per-hop latency and link utilisation.</figcaption>
+    </figure>
+
+    <figure class="shot">
+      <img src="docs/img/agent-flow.png" alt="Agent Flow: a completed triage run and its pipeline, with a human approval stage" loading="lazy" decoding="async">
+      <figcaption>Agent runs are advisory and gated. Nothing is executed against your equipment without a human approving it, and every run is journalled.</figcaption>
+    </figure>
+
+    <figure class="shot">
+      <img src="docs/img/knowledge-graph.png" alt="Knowledge graph of devices, relationships and alerts" loading="lazy" decoding="async">
+      <figcaption>Devices, relationships and alerts as a graph — for answering “what else depends on this”.</figcaption>
+    </figure>
+  </section>
+
   <section class="about">
     <div>
       <h2>What it watches</h2>
@@ -477,7 +515,12 @@
     // Free-edition installers are published as GitHub Release assets (the
     // AppImage is >100MB, above the git file limit, so a committed /downloads/
     // dir can't hold it). Release-asset URLs are public and stable per tag.
-    var DOWNLOAD_BASE = "https://github.com/peterbouharb/stratum-releases/releases/download/free-v0.1.5/";
+    // "latest" rather than a pinned tag: this was hardcoded to free-v0.1.2 and
+    // then free-v0.1.5, and each time the page kept serving an old build after
+    // a release shipped. The stable per-release aliases below live on every
+    // release, so /releases/latest/download/<alias> always resolves to the
+    // newest one without this page needing an edit.
+    var DOWNLOAD_BASE = "https://github.com/peterbouharb/stratum-releases/releases/latest/download/";
 
     var repoLink = document.getElementById("repo-link");
 
