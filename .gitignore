@@ -1,0 +1,8 @@
+# Installers are release assets, never repository content. Committing them made
+# a fresh clone of this download page ~246 MB, and nothing ever referenced the
+# committed copies — index.html and the README both link to the release assets.
+downloads/
+*.exe
+*.msi
+*.deb
+*.AppImage
